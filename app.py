@@ -25,7 +25,7 @@ def fetch_xml_data(access_key, secret_key, region, bucket_name, directory):
 
         for item in response.get('Contents', []):
             file_key = item['Key']
-            if file_key.lower().endswith('.xml') and 'history_forecast' not in file_key:  # Filter out unwanted files
+            if file_key.endswith('.xml') and 'history_forecast' not in file_key:  # Filter out unwanted files
                 logging.debug(f"Processing file: {file_key}")
                 obj = s3_client.get_object(Bucket=bucket_name, Key=file_key)
                 xml_content = obj['Body'].read()
